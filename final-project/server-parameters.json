@@ -2,5 +2,17 @@
 	{
 		"ParameterKey": "EnvironmentName",
 		"ParameterValue": "UdacityProject"
+	},
+	{
+		"ParameterKey": "SSHKeyPair",
+		"ParameterValue": "nd9990_keypair"
+	},
+	{
+		"ParameterKey": "ImgId",
+		"ParameterValue": "ami-0b5eea76982371e91"
+	},
+	{
+		"ParameterKey": "InstanceType",
+		"ParameterValue": "t3.medium"
 	}
 ]
