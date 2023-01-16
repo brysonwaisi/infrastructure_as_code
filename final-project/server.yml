@@ -55,7 +55,7 @@ Resources:
         CidrIp: 0.0.0.0/0
 # IAM Policies and Roles
 
-  S3BucketsRole:
+  RoleForSSMAccess:
     Type: "AWS::IAM::Role"
     Properties:
       AssumeRolePolicyDocument:
@@ -67,29 +67,15 @@ Resources:
                 - ec2.amazonaws.com
             Action:
               - 'sts:AssumeRole'
-      Path: "/"
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AmazonS3FullAccess
-
-  S3BucketsInstanceProfile:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+    
+  # Instance profile 
+  ServerInstanceProfile:
     Type: "AWS::IAM::InstanceProfile"
     Properties:
-      Path: "/"
       Roles:
-        - !Ref S3BucketsRole
-
-  S3BucketsPolicy:
-    Type: AWS::IAM::Policy
-    Properties:
-      PolicyName: S3BucketsPolicy
-      PolicyDocument:
-        Statement:
-          - Effect: Allow
-            Action:
-              - s3:*
-            Resource: "*"
-      Roles:
-        - Ref: S3BucketsRole
+        - !Ref RoleForSSMAccess
 
 # Launch Configuration 
 
@@ -100,14 +86,13 @@ Resources:
         Fn::Base64: !Sub |
           #!/bin/bash
           apt-get update -y
-          apt-get install apache2 awscli -y
+          apt-get install apache2 -y
           systemctl start apache2.service
           cd /var/www/html
-          aws s3 cp s3://my-464754654390-bucket/index.html
+          echo "it works! Udagram, Udacity!" > index.html
     
       ImageId: !Ref ImgId
-      IamInstanceProfile: !Ref S3BucketsInstanceProfile
-      # KeyName: !Ref SSHKeyPair
+      IamInstanceProfile: !Ref ServerInstanceProfile
       SecurityGroups:
         - Ref: WebServerSecGroup
       InstanceType: !Ref InstanceType
