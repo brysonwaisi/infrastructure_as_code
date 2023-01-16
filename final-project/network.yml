@@ -8,22 +8,22 @@ Parameters:
         Type: String
         Default: 10.0.0.0/16
 
-    PubSubnet1CIDR:
+    PublicSubnet1CIDR:
         Description: Please enter the IP range (CIDR notation) for the public subnet in the first Availability Zone
         Type: String
         Default: 10.0.0.0/24
 
-    PubSubnet2CIDR:
+    PublicSubnet2CIDR:
         Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone
         Type: String
         Default: 10.0.1.0/24
 
-    PrivSubnet1CIDR:
+    PrivateSubnet1CIDR:
         Description: Please enter the IP range (CIDR notation) for the private subnet in the first Availability Zone
         Type: String
         Default: 10.0.2.0/24
 
-    PrivSubnet2CIDR:
+    PrivateSubnet2CIDR:
         Description: Please enter the IP range (CIDR notation) for the private subnet in the second Availability Zone
         Type: String
         Default: 10.0.3.0/24
@@ -56,7 +56,7 @@ Resources:
         Properties:
             VpcId: !Ref VPC
             AvailabilityZone: !Select [ 0, !GetAZs '' ]
-            CidrBlock: !Ref PubSubnet1CIDR
+            CidrBlock: !Ref PublicSubnet1CIDR
             MapPublicIpOnLaunch: true
             Tags: 
                 - Key: Name 
@@ -67,7 +67,7 @@ Resources:
         Properties:
             VpcId: !Ref VPC
             AvailabilityZone: !Select [ 1, !GetAZs '' ]
-            CidrBlock: !Ref PubSubnet2CIDR
+            CidrBlock: !Ref PublicSubnet2CIDR
             MapPublicIpOnLaunch: true
             Tags: 
                 - Key: Name 
@@ -78,7 +78,7 @@ Resources:
         Properties:
             VpcId: !Ref VPC
             AvailabilityZone: !Select [ 0, !GetAZs '' ]
-            CidrBlock: !Ref PrivSubnet1CIDR
+            CidrBlock: !Ref PrivateSubnet1CIDR
             MapPublicIpOnLaunch: false
             Tags: 
                 - Key: Name 
@@ -89,7 +89,7 @@ Resources:
         Properties:
             VpcId: !Ref VPC
             AvailabilityZone: !Select [ 1, !GetAZs '' ]
-            CidrBlock: !Ref PrivSubnet2CIDR
+            CidrBlock: !Ref PrivateSubnet2CIDR
             MapPublicIpOnLaunch: false
             Tags: 
                 - Key: Name 
@@ -118,6 +118,7 @@ Resources:
         Properties:
             AllocationId: !GetAtt NatGateway2EIP.AllocationId
             SubnetId: !Ref PublicSubnet2
+    # Routing configuration
     
     PublicRouteTable:
         Type: AWS::EC2::RouteTable

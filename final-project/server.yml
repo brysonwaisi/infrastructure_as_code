@@ -20,8 +20,7 @@ Resources:
     Properties:
       GroupDescription: Allow http to our load balancer
       VpcId:
-        Fn::ImportValue:
-          !Sub "${EnvironmentName}-VPCID"
+        Fn::ImportValue: !Sub "${EnvironmentName}-VPCID"
       SecurityGroupIngress:
       - IpProtocol: tcp
         FromPort: 80
@@ -39,8 +38,7 @@ Resources:
     Properties:
       GroupDescription: Allow http to our hosts and SSH from local only
       VpcId:
-        Fn::ImportValue:
-          !Sub "${EnvironmentName}-VPCID"
+        Fn::ImportValue: !Sub "${EnvironmentName}-VPCID"
       SecurityGroupIngress:
       - IpProtocol: tcp
         FromPort: 80
@@ -105,11 +103,11 @@ Resources:
           apt-get install apache2 awscli -y
           systemctl start apache2.service
           cd /var/www/html
-          aws s3 cp s3://my-829292322830-bucket/index.html
+          aws s3 cp s3://my-464754654390-bucket/index.html
     
       ImageId: !Ref ImgId
       IamInstanceProfile: !Ref S3BucketsInstanceProfile
-      KeyName: !Ref SSHKeyPair
+      # KeyName: !Ref SSHKeyPair
       SecurityGroups:
         - Ref: WebServerSecGroup
       InstanceType: !Ref InstanceType
