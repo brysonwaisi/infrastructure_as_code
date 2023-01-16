@@ -10,3 +10,6 @@ Contains CloudFormation code written using this YAML template for building the c
 We use a JSON file for increasing the generic nature of the YAML code. For example, the JSON file contains a "ParameterKey" as "EnvironmentName" and "ParameterValue" as "UdacityProject". 
 
 In YAML code, the `${EnvironmentName}` would be substituted with `UdacityProject` accordingly.
+
+### Link to URL
+http://udagr-webap-x6jxd00f964x-2009002173.us-east-1.elb.amazonaws.com/
