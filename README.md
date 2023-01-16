@@ -2,7 +2,7 @@
 This folder provides the code for the "ND9991 - C2- Infrastructure as Code - Deploy a high-availability web app using CloudFormation" project. This folder contains the following files:
 
 ### Udagram Infrastructure
-![udagram-diagram] (./final-project/Udagram.png)
+![udagram-diagram] (https://github.com/brysonwaisi/infrastructure_as_code/blob/master/final-project/Udagram%20.png)
 #### network.yml and server.yml
 Contains CloudFormation code written using this YAML template for building the cloud infrastructure.
 
