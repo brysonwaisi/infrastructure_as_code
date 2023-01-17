@@ -1,3 +1,5 @@
+Description: >
+  Bryson Nyamwange / Udacity 2023
 Parameters:
   EnvironmentName:
     Description: An environment name that will be prefixed to resource names
